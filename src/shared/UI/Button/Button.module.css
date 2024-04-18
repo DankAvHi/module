@@ -4,6 +4,17 @@
     box-shadow: var(--shadow);
 
     text-align: center;
+
+    transition: 0.2s;
+}
+.Button:hover:not(:disabled) {
+    filter: saturate(1.5);
+}
+.Button:active:not(:disabled) {
+    scale: 0.98;
+}
+.Button:disabled {
+    background-color: var(--gray);
 }
 
 .Button_primary {

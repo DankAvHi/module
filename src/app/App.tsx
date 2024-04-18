@@ -1,11 +1,16 @@
+import { RouterProvider } from "react-router-dom";
 import { Header } from "../widgets/Header";
 import styles from "./App.module.css";
+import { appRouter } from "./App.routes";
 
 function App() {
     return (
-        <main className={styles.App}>
+        <>
             <Header />
-        </main>
+            <main className={styles.App}>
+                <RouterProvider router={appRouter} />
+            </main>
+        </>
     );
 }
 

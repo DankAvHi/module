@@ -15,11 +15,11 @@
 }
 .titleSmall {
     font-size: 24px;
-    font-weight: 500;
+    font-weight: bold;
 }
 .titleBig {
     font-size: 32px;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .black {
@@ -33,4 +33,11 @@
 }
 .white {
     color: var(--white);
+}
+
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
 }
