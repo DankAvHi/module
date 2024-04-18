@@ -51,7 +51,8 @@ img {
 }
 
 html,
-body {
+body,
+#root {
     min-height: 100svh;
 
     background-color: white;

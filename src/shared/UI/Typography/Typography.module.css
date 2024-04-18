@@ -1,0 +1,36 @@
+.Typography {
+}
+
+.small {
+    font-size: 11px;
+}
+.standart {
+    font-size: 16px;
+}
+.big {
+    font-size: 18px;
+}
+.bigger {
+    font-size: 20px;
+}
+.titleSmall {
+    font-size: 24px;
+    font-weight: 500;
+}
+.titleBig {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.black {
+    color: var(--black);
+}
+.blackText {
+    color: var(--black-text);
+}
+.gray {
+    color: var(--gray);
+}
+.white {
+    color: var(--white);
+}

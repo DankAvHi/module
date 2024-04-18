@@ -1,0 +1,26 @@
+.Button {
+    border-radius: 40px;
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+}
+
+.Button_primary {
+    background-color: var(--green);
+}
+.Button_secondary {
+    border: var(--green) 1px solid;
+
+    background-color: white;
+}
+.Button_big {
+    padding: 18.5px 0;
+    max-width: 500px;
+    width: 100%;
+}
+.Button_small {
+    padding: 12px 0;
+    max-width: 238px;
+    width: 100%;
+}
