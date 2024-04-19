@@ -1,5 +1,7 @@
+import { DownIcon } from "../../assets/icons";
 import styles from "./Select.module.css";
-import CustomSelect from "react-select";
+import CustomSelect, { components, DropdownIndicatorProps } from "react-select";
+import { SelectStyles } from "./Select.styles";
 
 const options = [
     { value: "D", label: "День" },
@@ -8,5 +10,19 @@ const options = [
 ];
 
 export const Select = () => {
-    return <CustomSelect options={options} />;
+    const DropdownIndicator: React.FC<DropdownIndicatorProps> = ({ children, ...props }) => (
+        <components.DropdownIndicator {...props}>
+            <img src={DownIcon} alt="" />
+        </components.DropdownIndicator>
+    );
+
+    return (
+        <CustomSelect
+            styles={SelectStyles}
+            components={{ DropdownIndicator }}
+            className={styles.Select}
+            options={options}
+            defaultValue={options[2]}
+        />
+    );
 };
