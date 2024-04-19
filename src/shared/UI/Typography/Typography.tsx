@@ -13,5 +13,5 @@ export const Typography: React.FC<TypographyProps> = ({
     color = "blackText",
     align = "left",
 }) => {
-    return <p className={`${styles.Typography} ${styles[size]} ${styles[color]} ${styles[align]}`}>{children}</p>;
+    return <span className={`${styles.Typography} ${styles[size]} ${styles[color]} ${styles[align]}`}>{children}</span>;
 };

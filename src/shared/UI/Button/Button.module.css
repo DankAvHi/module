@@ -26,12 +26,12 @@
     background-color: white;
 }
 .Button_big {
-    padding: 18.5px 0;
+    padding: 18.5px 12px;
     max-width: 500px;
     width: 100%;
 }
 .Button_small {
-    padding: 12px 0;
+    padding: 12px 12px;
     max-width: 238px;
     width: 100%;
 }

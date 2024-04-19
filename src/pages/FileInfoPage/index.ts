@@ -1,0 +1,1 @@
+export { FileInfoPage } from "./FileInfoPage";

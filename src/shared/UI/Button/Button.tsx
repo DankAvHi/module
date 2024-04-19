@@ -6,13 +6,15 @@ type ButtonProps = {
     type?: "primary" | "secondary";
     size?: "big" | "small";
     disabled?: boolean;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export const Button: React.FC<ButtonProps> = ({ children, type = "primary", size = "big", disabled }) => {
+export const Button: React.FC<ButtonProps> = ({ children, type = "primary", size = "big", disabled, onClick }) => {
     const textSize = size === "big" ? "bigger" : "standart";
     const textColor = type === "primary" ? "white" : "blackText";
     return (
         <button
+            onClick={onClick}
             className={`${styles.Button} ${styles[`Button_${type}`]} ${styles[`Button_${size}`]}`}
             disabled={disabled}
         >

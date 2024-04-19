@@ -1,12 +1,12 @@
-import styles from "./StartPage.module.css";
+import styles from "./TablePage.module.css";
 import pageStyles from "../../shared/styles/global.module.css";
 import { Logo } from "../../shared/UI/Logo";
 import { Typography } from "../../shared/UI/Typography";
-import { FilePicker } from "../../shared/UI/FilePicker";
+import { Button } from "../../shared/UI/Button";
 
-export const StartPage = () => {
+export const TablePage = () => {
     return (
-        <div className={`${pageStyles.verticalPage} ${styles.StartPage}`}>
+        <div className={`${pageStyles.verticalPage} ${styles.TablePage}`}>
             <Logo size="small" />
 
             <Typography
@@ -21,7 +21,7 @@ export const StartPage = () => {
                 color="gray"
             >{`Загрузка возможна в формате .csv .json`}</Typography>
 
-            <FilePicker />
+            <Button>{`Прикрепить файл`}</Button>
         </div>
     );
 };
