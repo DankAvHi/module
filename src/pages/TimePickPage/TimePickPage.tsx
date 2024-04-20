@@ -7,10 +7,22 @@ import { Select } from "../../shared/UI/Select";
 import { useFileContext } from "../../app/providers";
 import { useNavigate } from "react-router-dom";
 import { SelectOption } from "../../shared/types.d";
+import { useEffect } from "react";
+
+const options: SelectOption[] = [
+    { value: "D", label: "День" },
+    { value: "W", label: "Неделя" },
+    { value: "M", label: "Месяц" },
+    { value: "Y", label: "Год" },
+];
 
 export const TimePickPage = () => {
     const { setPickedTime } = useFileContext();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setPickedTime(options[0]);
+    }, [setPickedTime]);
 
     const selectOnChangeHandler = (newValue: unknown) => {
         const time = newValue as SelectOption;
@@ -33,7 +45,7 @@ export const TimePickPage = () => {
                 color="gray"
             >{`Выберите варианты из выпадающего списка`}</Typography>
 
-            <Select onChange={selectOnChangeHandler} />
+            <Select options={options as []} onChange={selectOnChangeHandler} />
 
             <Button onClick={acceptButtonOnClickHandler}>{`Подтвердить`}</Button>
         </div>

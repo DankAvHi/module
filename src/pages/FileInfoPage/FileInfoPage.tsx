@@ -16,6 +16,10 @@ export const FileInfoPage = () => {
         navigate("/");
     };
 
+    const acceptFile = () => {
+        navigate("/table");
+    };
+
     if (!file || !pickedTime) {
         return (
             <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
@@ -59,7 +63,7 @@ export const FileInfoPage = () => {
             </ul>
 
             <div className={styles.actions}>
-                <Button size="small">{`Спрогнозировать`}</Button>
+                <Button onClick={acceptFile} size="small">{`Спрогнозировать`}</Button>
                 <Button onClick={deleteFile} size="small" type="secondary">{`Удалить файл`}</Button>
             </div>
         </div>
