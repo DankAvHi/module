@@ -1,5 +1,6 @@
 .App {
     padding: 12px;
+    overflow: hidden;
 
     margin: 0 auto;
 

@@ -7,4 +7,16 @@
     justify-content: center;
     flex-direction: column;
     gap: 32px;
+    animation: page 0.5s;
+}
+
+@keyframes page {
+    0% {
+        position: relative;
+        right: -100%;
+    }
+    100% {
+        position: relative;
+        right: 0;
+    }
 }

@@ -1,6 +1,6 @@
 import { DownIcon } from "../../assets/icons";
 import styles from "./Select.module.css";
-import CustomSelect, { components, DropdownIndicatorProps } from "react-select";
+import CustomSelect, { ActionMeta, components, DropdownIndicatorProps, OnChangeValue } from "react-select";
 import { SelectStyles } from "./Select.styles";
 
 const options = [
@@ -9,7 +9,11 @@ const options = [
     { value: "M", label: "Месяц" },
 ];
 
-export const Select = () => {
+type SelectPropsType = {
+    onChange?: (newValue: unknown, actionMeta?: ActionMeta<unknown>) => void;
+};
+
+export const Select: React.FC<SelectPropsType> = ({ onChange }) => {
     const DropdownIndicator: React.FC<DropdownIndicatorProps> = ({ children, ...props }) => (
         <components.DropdownIndicator {...props}>
             <img src={DownIcon} alt="" />
@@ -18,6 +22,7 @@ export const Select = () => {
 
     return (
         <CustomSelect
+            onChange={onChange}
             styles={SelectStyles}
             components={{ DropdownIndicator }}
             className={styles.Select}

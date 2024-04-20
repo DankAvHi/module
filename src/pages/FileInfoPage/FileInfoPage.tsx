@@ -3,8 +3,28 @@ import pageStyles from "../../shared/styles/global.module.css";
 import { Logo } from "../../shared/UI/Logo";
 import { Typography } from "../../shared/UI/Typography";
 import { Button } from "../../shared/UI/Button";
+import { useFileContext } from "../../app/providers";
+import { useNavigate } from "react-router-dom";
 
 export const FileInfoPage = () => {
+    const { file, pickedTime, setFile, setPickedTime } = useFileContext();
+    const navigate = useNavigate();
+
+    const deleteFile = () => {
+        setFile(undefined);
+        setPickedTime(undefined);
+        navigate("/");
+    };
+
+    if (!file || !pickedTime) {
+        return (
+            <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+                <Typography align="center" size="titleBig" color="black">{`Ошибка при загрузке файла`}</Typography>
+                <Button onClick={() => navigate("/")}>{`Вернутся назад`}</Button>
+            </div>
+        );
+    }
+
     return (
         <div className={`${pageStyles.verticalPage} ${styles.FileInfoPage}`}>
             <Logo size="small" />
@@ -20,29 +40,27 @@ export const FileInfoPage = () => {
             <ul className={styles.infoList}>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Название вашего файла:`}</Typography>
-                    <Typography color="gray">{`AirPassengers.csv`}</Typography>
+                    <Typography color="gray">{file.name}</Typography>
                 </li>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Тип файла:`}</Typography>
-                    <Typography color="gray">{`.csv`}</Typography>
+                    <Typography color="gray">{file.type === "text/csv" ? ".csv" : ".json"}</Typography>
                 </li>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Временной интервал прогноза:`}</Typography>
-                    <Typography color="gray">{`месяц`}</Typography>
-                </li>
-                <li className={styles.infoItem}>
-                    <Typography size="big">{`Дата создания:`}</Typography>
-                    <Typography color="gray">{`11.03.2024 15:32`}</Typography>
+                    <Typography color="gray">{pickedTime.label}</Typography>
                 </li>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Дата последнего использования:`}</Typography>
-                    <Typography color="gray">{`17.04.2024  11:22`}</Typography>
+                    <Typography color="gray">{`${new Date(file.lastModified).toLocaleDateString("ru")} 
+                    ${new Date(file.lastModified).toLocaleTimeString("ru")}
+                    `}</Typography>
                 </li>
             </ul>
 
             <div className={styles.actions}>
                 <Button size="small">{`Спрогнозировать`}</Button>
-                <Button size="small" type="secondary">{`Удалить файл`}</Button>
+                <Button onClick={deleteFile} size="small" type="secondary">{`Удалить файл`}</Button>
             </div>
         </div>
     );
