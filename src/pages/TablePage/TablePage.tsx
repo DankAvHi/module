@@ -5,6 +5,7 @@ import { Select } from "../../shared/UI/Select";
 import { useFileContext } from "../../app/providers";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../shared/UI/Input";
+import { Graph } from "../../widgets/Graph";
 
 const modelTypeOptions = [
     { label: "Линейная Регрессия", value: "LR" },
@@ -12,7 +13,7 @@ const modelTypeOptions = [
 ];
 
 export const TablePage = () => {
-    const { pickedTime } = useFileContext();
+    const { pickedTime, prediction } = useFileContext();
     const navigate = useNavigate();
 
     const value = pickedTime?.value;
@@ -73,7 +74,11 @@ export const TablePage = () => {
                 </div>
                 <Button size="small">{`Подтвердить`}</Button>
             </div>
-            <div className={styles.result}></div>
+            <div className={styles.result}>
+                <Typography align="center" size="titleSmall" color="black">{`Результат прогноза `}</Typography>
+                <Graph prediction={prediction as { [key: string]: number }} />
+                <Button size="small" type="secondary">{`Скачать результат`}</Button>
+            </div>
         </div>
     );
 };

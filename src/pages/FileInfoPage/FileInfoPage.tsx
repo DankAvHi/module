@@ -6,8 +6,62 @@ import { Button } from "../../shared/UI/Button";
 import { useFileContext } from "../../app/providers";
 import { useNavigate } from "react-router-dom";
 
+const fetchPrediction = async (file: File) => {
+    return {
+        predictions: {
+            message: "OK",
+
+            code: 200,
+
+            result: {
+                pred: {
+                    "2023-08-01": 25.6,
+
+                    "2023-08-02": 28.1,
+
+                    "2023-08-03": 26.3,
+
+                    "2023-08-04": 29.7,
+
+                    "2023-08-05": 27.9,
+
+                    "2023-08-06": 30.2,
+
+                    "2023-08-07": 28.8,
+
+                    "2023-08-08": 31.5,
+
+                    "2023-08-09": 32.1,
+
+                    "2023-08-10": 30.7,
+
+                    "2023-08-11": 33.4,
+
+                    "2023-08-12": 31.9,
+                },
+            },
+        },
+
+        record: {
+            id: 10,
+
+            name: "someTS",
+
+            file_type: "CSV",
+
+            time_unit: "MONTH",
+
+            path: "/mnt/data/save_files/someTS.csv",
+
+            creation_date: "2023-08-09T15:30:00+05:30",
+
+            last_usage: "2023-08-09T15:30:00+05:30",
+        },
+    };
+};
+
 export const FileInfoPage = () => {
-    const { file, pickedTime, setFile, setPickedTime } = useFileContext();
+    const { file, pickedTime, setFile, setPickedTime, setPrediction } = useFileContext();
     const navigate = useNavigate();
 
     const deleteFile = () => {
@@ -16,7 +70,10 @@ export const FileInfoPage = () => {
         navigate("/");
     };
 
-    const acceptFile = () => {
+    const acceptFile = async () => {
+        await fetchPrediction(file as File).then((prediction) =>
+            setPrediction({ ...prediction.predictions.result.pred }),
+        );
         navigate("/table");
     };
 

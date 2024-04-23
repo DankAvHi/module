@@ -1,12 +1,21 @@
 .TablePage {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .settings {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     gap: 48px;
     align-items: center;
 }
 .settingsTitle {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -21,5 +30,15 @@
 .option {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 8px;
+}
+
+.result {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
 }
