@@ -1,0 +1,678 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "API",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "paths": {
+        "/api/load": {
+            "post": {
+                "operationId": "post~API.load_file",
+                "summary": "Loader endpoint",
+                "tags": [
+                    "API"
+                ],
+                "responses": {
+                    "404": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "No file was provided"
+                                }
+                            }
+                        },
+                        "description": "File not provided response"
+                    },
+                    "400": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "File extension must nbe either .json or .csv"
+                                }
+                            }
+                        },
+                        "description": "File wrong extension response"
+                    },
+                    "200": {
+                        "content": {
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "File with such name already exists"
+                                }
+                            },
+                            "record": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "file_type": {
+                                            "type": "string"
+                                        },
+                                        "time_unit": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "creation_date": {
+                                            "type": "string"
+                                        },
+                                        "last_usage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "File already exists response"
+                    },
+                    "201": {
+                        "content": {
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Created"
+                                }
+                            },
+                            "record": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "file_type": {
+                                            "type": "string"
+                                        },
+                                        "time_unit": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "creation_date": {
+                                            "type": "string"
+                                        },
+                                        "last_usage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "File created successfully response"
+                    }
+                },
+                "description": "\n    Endpoint that allows to download a file to server. Creates record in DB if successful. Requires a file!\n    "
+            }
+        },
+        "/api/records": {
+            "get": {
+                "operationId": "get~API.all_records",
+                "summary": "All records info",
+                "tags": [
+                    "API"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "records": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "format": "int32"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "file_type": {
+                                                "type": "string"
+                                            },
+                                            "time_unit": {
+                                                "type": "string"
+                                            },
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "creation_date": {
+                                                "type": "string"
+                                            },
+                                            "last_usage": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "OK"
+                                }
+                            }
+                        },
+                        "description": "Default Response"
+                    }
+                },
+                "description": "\n    Endpoint that returns info about all records\n    "
+            }
+        },
+        "/": {
+            "get": {
+                "operationId": "get~greet",
+                "summary": "Greet",
+                "responses": {
+                    "default": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/delete/{file_id}": {
+            "delete": {
+                "operationId": "delete~API.delete_file",
+                "summary": "Manually delete record and file",
+                "tags": [
+                    "API"
+                ],
+                "parameters": [
+                    {
+                        "name": "file_id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "No content found"
+                                }
+                            },
+                            "record": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Not found data to delete"
+                    },
+                    "200": {
+                        "content": {
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Deleted"
+                                }
+                            },
+                            "record": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "file_type": {
+                                            "type": "string"
+                                        },
+                                        "time_unit": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "creation_date": {
+                                            "type": "string"
+                                        },
+                                        "last_usage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Deleted successfully"
+                    }
+                },
+                "description": "\n    Endppoint that allows user delete data he loaded previously\n    "
+            }
+        },
+        "/api/records/{file_id}": {
+            "get": {
+                "operationId": "get~API.one_record",
+                "summary": "One records info",
+                "tags": [
+                    "API"
+                ],
+                "parameters": [
+                    {
+                        "name": "file_id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "record": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "file_type": {
+                                            "type": "string"
+                                        },
+                                        "time_unit": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "creation_date": {
+                                            "type": "string"
+                                        },
+                                        "last_usage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "OK"
+                                }
+                            }
+                        },
+                        "description": "Record info found response"
+                    },
+                    "404": {
+                        "content": {
+                            "error": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Not found"
+                                }
+                            },
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "File that you are searching for can not be found"
+                                }
+                            }
+                        },
+                        "description": "File can not be found response"
+                    }
+                },
+                "description": "\n    Endpoint that returns info about one record\n    "
+            }
+        },
+        "/api/predict/{file_id}": {
+            "post": {
+                "operationId": "post~API.make_predictions",
+                "summary": "Predict endpoint returning predictions dataset",
+                "tags": [
+                    "API"
+                ],
+                "parameters": [
+                    {
+                        "name": "file_id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "File not found"
+                                }
+                            }
+                        },
+                        "description": "File with provided id does not exist"
+                    },
+                    "400": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Wrong model type specified"
+                                }
+                            }
+                        },
+                        "description": "Wrong model type specified"
+                    },
+                    "200": {
+                        "content": {
+                            "predictions": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "pred": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "datetime": {
+                                                            "type": "string",
+                                                            "default": "value"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "record": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "file_type": {
+                                            "type": "string"
+                                        },
+                                        "time_unit": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "creation_date": {
+                                            "type": "string"
+                                        },
+                                        "last_usage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "predictions['result']['preds'] contains json with a prediction. Key is string datetime, value is float"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$defs": {
+                                    "PredictionTimeUnit": {
+                                        "enum": [
+                                            "D",
+                                            "W",
+                                            "M",
+                                            "Y"
+                                        ],
+                                        "title": "PredictionTimeUnit",
+                                        "type": "string"
+                                    }
+                                },
+                                "properties": {
+                                    "steps": {
+                                        "title": "Steps",
+                                        "type": "integer"
+                                    },
+                                    "prediction_time_unit": {
+                                        "$ref": "#/components/schemas/PredictionTimeUnit"
+                                    },
+                                    "prediction_type": {
+                                        "title": "Prediction Type",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "steps",
+                                    "prediction_time_unit",
+                                    "prediction_type"
+                                ],
+                                "title": "PredictionRequest",
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "description": "\n    Endpoint returning prediction dataset.\n    "
+            }
+        },
+        "/api/set_time_unit/{file_id}": {
+            "put": {
+                "operationId": "put~API.set_tu",
+                "summary": "Put time unit value for a record",
+                "tags": [
+                    "API"
+                ],
+                "parameters": [
+                    {
+                        "name": "file_id",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "File not found"
+                                }
+                            }
+                        },
+                        "description": "File with provided id does not exist"
+                    },
+                    "403": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Time unit have been already specified for this file"
+                                }
+                            }
+                        },
+                        "description": "Time unit already specified"
+                    },
+                    "401": {
+                        "content": {
+                            "MESSAGE": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Time unit have been already specified for this file"
+                                }
+                            }
+                        },
+                        "description": "Wrong time unit type specified"
+                    },
+                    "200": {
+                        "content": {
+                            "message": {
+                                "schema": {
+                                    "type": "string",
+                                    "default": "Updated successfully"
+                                }
+                            },
+                            "record": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "file_type": {
+                                            "type": "string"
+                                        },
+                                        "time_unit": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        },
+                                        "creation_date": {
+                                            "type": "string"
+                                        },
+                                        "last_usage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Default Response"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "time_unit": {
+                                        "title": "Time Unit",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "time_unit"
+                                ],
+                                "title": "SetTURequest",
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "description": "\n    Enpoint that allows to specify Time Unit for uploaded data\n    "
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "API"
+        }
+    ],
+    "servers": [],
+    "security": [],
+    "components": {
+        "schemas": {
+            "PredictionTimeUnit": {
+                "type": "string",
+                "enum": [
+                    "D",
+                    "W",
+                    "M",
+                    "Y"
+                ]
+            },
+            "PredictionRequest": {
+                "$defs": {
+                    "PredictionTimeUnit": {
+                        "enum": [
+                            "D",
+                            "W",
+                            "M",
+                            "Y"
+                        ],
+                        "title": "PredictionTimeUnit",
+                        "type": "string"
+                    }
+                },
+                "properties": {
+                    "steps": {
+                        "title": "Steps",
+                        "type": "integer"
+                    },
+                    "prediction_time_unit": {
+                        "$ref": "#/components/schemas/PredictionTimeUnit"
+                    },
+                    "prediction_type": {
+                        "title": "Prediction Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "steps",
+                    "prediction_time_unit",
+                    "prediction_type"
+                ],
+                "title": "PredictionRequest",
+                "type": "object"
+            },
+            "SetTURequest": {
+                "properties": {
+                    "time_unit": {
+                        "title": "Time Unit",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "time_unit"
+                ],
+                "title": "SetTURequest",
+                "type": "object"
+            }
+        }
+    }
+}
