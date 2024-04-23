@@ -5,11 +5,27 @@ import { Logo } from "../../shared/UI/Logo";
 import { Typography } from "../../shared/UI/Typography";
 import pageStyles from "../../shared/styles/global.module.css";
 import styles from "./FileInfoPage.module.css";
+import { useEffect, useState } from "react";
+import { apiClient } from "../../shared/api";
+import { InlineResponse200 } from "../../shared/api/generated";
 
 export const FileInfoPage = () => {
+    const [fileInfo, setFileInfo] = useState<InlineResponse200>();
+
+    const { fileId, setFileId } = useFileContext();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const fetchInfo = async () => {
+            const info = await apiClient.getAPIOneRecord(fileId as number);
+            setFileInfo(info);
+        };
+        fetchInfo();
+    }, [fileId]);
+
     const deleteFile = () => {
+        setFileId(undefined);
+
         navigate("/");
     };
 
@@ -32,19 +48,23 @@ export const FileInfoPage = () => {
             <ul className={styles.infoList}>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Название вашего файла:`}</Typography>
-                    <Typography color="gray"></Typography>
+                    <Typography color="gray">{fileInfo?.name}</Typography>
                 </li>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Тип файла:`}</Typography>
-                    <Typography color="gray"></Typography>
+                    <Typography color="gray">{fileInfo?.fileType}</Typography>
                 </li>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Временной интервал прогноза:`}</Typography>
-                    <Typography color="gray"></Typography>
+                    <Typography color="gray">{fileInfo?.timeUnit}</Typography>
+                </li>
+                <li className={styles.infoItem}>
+                    <Typography size="big">{`Дата создания:`}</Typography>
+                    <Typography color="gray">{fileInfo?.creationDate}</Typography>
                 </li>
                 <li className={styles.infoItem}>
                     <Typography size="big">{`Дата последнего использования:`}</Typography>
-                    <Typography color="gray"></Typography>
+                    <Typography color="gray">{fileInfo?.lastUsage}</Typography>
                 </li>
             </ul>
 

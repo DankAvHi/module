@@ -6,6 +6,9 @@ import { Button } from "../../shared/UI/Button";
 import { Select } from "../../shared/UI/Select";
 import { useNavigate } from "react-router-dom";
 import { SelectOption } from "../../shared/types.d";
+import { useState } from "react";
+import { apiClient } from "../../shared/api";
+import { useFileContext } from "../../app/providers";
 
 const options: SelectOption[] = [
     { value: "D", label: "День" },
@@ -15,13 +18,19 @@ const options: SelectOption[] = [
 ];
 
 export const TimePickPage = () => {
+    const { fileId } = useFileContext();
+    const [time, setTime] = useState<SelectOption>();
+
     const navigate = useNavigate();
 
     const selectOnChangeHandler = (newValue: unknown) => {
         const time = newValue as SelectOption;
+        setTime(time);
     };
 
-    const acceptButtonOnClickHandler = () => {
+    const acceptButtonOnClickHandler = async () => {
+        await apiClient.putAPISetTu(fileId as number, { timeUnit: time?.value as string });
+
         navigate("/fileinfo");
     };
 

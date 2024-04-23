@@ -5,13 +5,17 @@ import { Typography } from "../../shared/UI/Typography";
 import { FilePicker } from "../../shared/UI/FilePicker";
 import { useNavigate } from "react-router-dom";
 import { sendFile } from "../../shared/api/kostyl";
+import { useFileContext } from "../../app/providers";
 
 export const StartPage = () => {
+    const { setFileId } = useFileContext();
     const navigate = useNavigate();
 
     const filePickerOnChangeHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
-            await sendFile(event.target.files[0]);
+            const res = await sendFile(event.target.files[0]);
+            setFileId(res.id);
+
             navigate("/timepick");
         }
     };
