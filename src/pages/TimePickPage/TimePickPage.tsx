@@ -4,10 +4,8 @@ import { Logo } from "../../shared/UI/Logo";
 import { Typography } from "../../shared/UI/Typography";
 import { Button } from "../../shared/UI/Button";
 import { Select } from "../../shared/UI/Select";
-import { useFileContext } from "../../app/providers";
 import { useNavigate } from "react-router-dom";
 import { SelectOption } from "../../shared/types.d";
-import { useEffect } from "react";
 
 const options: SelectOption[] = [
     { value: "D", label: "День" },
@@ -17,16 +15,10 @@ const options: SelectOption[] = [
 ];
 
 export const TimePickPage = () => {
-    const { setPickedTime } = useFileContext();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        setPickedTime(options[0]);
-    }, [setPickedTime]);
 
     const selectOnChangeHandler = (newValue: unknown) => {
         const time = newValue as SelectOption;
-        setPickedTime(time);
     };
 
     const acceptButtonOnClickHandler = () => {

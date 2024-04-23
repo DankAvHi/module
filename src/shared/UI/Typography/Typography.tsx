@@ -1,7 +1,7 @@
 import styles from "./Typography.module.css";
 
 type TypographyProps = {
-    children: React.JSX.Element | string;
+    children?: React.JSX.Element | string;
     size?: "titleSmall" | "titleBig" | "standart" | "small" | "big" | "bigger";
     color?: "black" | "blackText" | "gray" | "white";
     align?: "center" | "left";
