@@ -4,12 +4,14 @@ import { Logo } from "../../shared/UI/Logo";
 import { Typography } from "../../shared/UI/Typography";
 import { FilePicker } from "../../shared/UI/FilePicker";
 import { useNavigate } from "react-router-dom";
+import { sendFile } from "../../shared/api/kostyl";
 
 export const StartPage = () => {
     const navigate = useNavigate();
 
     const filePickerOnChangeHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+            await sendFile(event.target.files[0]);
             navigate("/timepick");
         }
     };
