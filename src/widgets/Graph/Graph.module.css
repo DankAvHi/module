@@ -1,2 +1,17 @@
 .Graph {
+    position: relative;
+
+    width: 500px;
+}
+
+.value {
+    position: absolute;
+    top: 45%;
+    left: -10%;
+
+    transform: rotateZ(-90deg);
+}
+.date {
+    position: absolute;
+    left: 44%;
 }
